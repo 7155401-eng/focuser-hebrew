@@ -1,0 +1,115 @@
+# תרגום עברי לתוסף הדפדפן של Focuser; מיועד לשילוב במקור הרשמי
+block:
+  blocked: האתר נחסם
+  reason:
+    domain: הדומיין נמצא ברשימת חסימה
+    keyword: הכתובת מכילה מילה חסומה
+    urlPath: החלק הזה באתר חסום
+    wildcard: הכתובת מתאימה לתבנית חסומה
+    everything: כל האינטרנט חסום כרגע
+  attempt:
+    '1': ניסיון ראשון היום
+    n: ניסיון מספר $1
+  goBack: חזרה
+  closeTab: סגירת הכרטיסייה
+  pressEsc: לחץ על
+  toGoBack: כדי לחזור
+  openApp: פתיחת Focuser
+  privacy: המידע נשאר במחשב שלך.
+popup:
+  blockingEverything: כל האינטרנט נחסם
+  rulesActive:
+    '1': כלל חסימה פעיל אחד
+    n: $1 כללי חסימה פעילים
+  'on': פעיל
+  'off': כבוי
+  statToday: היום
+  statSites: אתרים
+  statLists: רשימות
+  notRunning: יישום המחשב אינו פועל
+  disconnected: החסימה אינה פועלת. הפעל את Focuser במחשב כדי לשחזר את הכללים.
+  noAccessTitle: אין הרשאת גישה לאתרים
+  noAccess: Focuser זקוק להרשאה לכל האתרים כדי לחסום אותם וכדי להתחבר ליישום במחשב.
+  allowAccess: מתן הרשאה
+  currentSite: האתר הנוכחי
+  noSiteOpen: אין אתר פתוח
+  updateApp: יש לעדכן את התוכנה כדי להציג זאת
+  inLists: 'ברשימות: {names}'
+  notInAnyList: לא נמצא באף רשימה
+  unblockEverywhere: הסרת החסימה מכל הרשימות
+  noBlockList: יש ליצור תחילה רשימת חסימה בתוכנה.
+  blockThisSite: חסימת האתר הזה
+  blockList: רשימת חסימה
+  openApp: פתיחת Focuser
+  unreachable: לא ניתן להתחבר לתוכנה במחשב
+  blocked: '{host} נחסם ברשימה {name}'
+  alreadyBlocked: '{host} כבר חסום ברשימה {name}'
+  notInAnyListNote: '{host} אינו נמצא באף רשימה'
+  stubborn: האתר עדיין תואם לכלל מסוג {kind} ברשימה {name}. ערוך אותו בתוכנה.
+  unblocked: הוסרה חסימת {host} מהרשימות {names}
+select:
+  placeholder: בחירה…
+welcome:
+  headingUpdated: Focuser השתפר
+  headingInstalled: תודה שהתקנת את Focuser
+  introUpdated: מה השתנה בגרסה זו, ותזכורת קצרה לאופן הפעולה של המערכת.
+  introInstalled: Focuser מסייע לשמור על ריכוז באמצעות חסימת אתרים ותוכנות מסיחי דעת. כאן אפשר להתחיל.
+  setupTitle: נדרשת הגדרה אחת
+  setupBody1: רשימות החסימה נשמרות בתוכנה במחשב, ולא בתוסף. התוסף מקבל מהתוכנה את הכללים וכך אותה רשימה חלה גם על הדפדפן וגם
+    על התוכנות. השאר את Focuser פועל כדי שהחסימה בדפדפן תעבוד.
+  setupBody2: כשהתוכנה סגורה, מופיע סימון אדום ליד סמל התוסף ושום אתר אינו נחסם. כך התוסף מציג את מצב ההגנה האמיתי.
+  openApp: פתיחת Focuser
+  getApp: הורדת היישום למחשב
+  incognitoTitle: מתן הרשאה לתוסף בגלישה בסתר
+  incognitoBody: הדפדפן {browser} אינו מפעיל תוספים בחלונות פרטיים ללא אישור. בזמן חסימה פעילה, Focuser יסגור את {browser}
+    עד להפעלת ההרשאה.
+  incognitoStepsChromium: פתח את הגדרות התוסף והפעל ״{setting}״.
+  incognitoStepsFirefox: פתח את תפריט התוספים והערכות, בחר Focuser ואפשר את הפעלתו בחלונות פרטיים.
+  incognitoSettingIncognito: אפשר בחלונות גלישה בסתר
+  incognitoSettingInPrivate: אפשר בחלונות InPrivate
+  incognitoSettingPrivate: אפשר בחלונות פרטיים
+  incognitoReloadNote: שינוי ההגדרה יפעיל את התוסף מחדש, ולכן ייתכן שהעמוד הזה ייסגר. זהו מצב תקין.
+  incognitoOpenSettings: פתיחת הגדרות התוסף
+  versionBadge: גרסה {version}
+  whatsNewVersion: מה חדש בגרסה {version}
+  whatsNew: מה חדש
+  new1Title: נבנה מחדש
+  new1Body: התוסף נכתב מחדש. הוא קטן יותר, עולה מהר יותר, ואותו בסיס קוד תומך ב־Chrome, Edge, Brave ו־Firefox.
+  new2Title: דף חסימה ברור
+  new2Body: דף החסימה מציג את שם האתר, את הכלל שהופעל ואת מספר ניסיונות הגישה היום.
+  new3Title: מצב החסימה ברור
+  new3Body: חלונית התוסף מציגה באילו רשימות האתר באמת נמצא. הסרת חסימה מסירה אותו מכל הרשימות המתאימות.
+  new4Title: האתר אינו מוצג לרגע
+  new4Body: החסימה מופעלת לפני שהדף מצויר, כך שהתוכן החסום אינו מהבהב על המסך.
+  point1Title: יותר מסינון דומיינים
+  point1Body: ניתן לחסום אתר שלם, מילה בכתובת, תבנית או אזור מסוים באתר.
+  point2Title: חסימה רק בזמנים שבחרת
+  point2Body: אפשר להפעיל רשימות לפי לוח זמנים שבועי או למשך מחזור ריכוז אחד.
+  point3Title: נשאר במחשב
+  point3Body: התוסף מתקשר עם יישום Focuser במחשב שלך ולא עם שרת חיצוני.
+  waysTitle: ארבע דרכים לחסום
+  waysIntro: הוסף את הערכים בתוכנה תחת ״אתרים״. התוסף אוכף את ארבעת הסוגים.
+  waysCaption: סוגי כללים ומה הם חוסמים
+  colKind: סוג
+  colExample: דוגמה
+  colCovers: תחולת הכלל
+  kindSite: אתר
+  kindWord: מילה
+  kindPattern: תבנית
+  kindSection: אזור באתר
+  coversSite: האתר וכל הדפים שמתחתיו
+  coversWord: כל כתובת המכילה את המילה
+  coversPattern: כל כתובת המתאימה לתבנית
+  coversSection: החלק המסוים הזה באתר
+  openSourceTitle: חינמי ובקוד פתוח
+  openSourceBody1: Focuser הוא פרויקט קוד פתוח, גם התוכנה וגם התוסף. ניתן לעיין בקוד, לבדוק את אופן הפעולה ולהתאים אותו לצרכים
+    שלך.
+  openSourceBody2: הצעות לשיפור, דיווחי תקלות ותרומות קוד מתקבלים במאגר הפרויקט ב־GitHub.
+  star: מתן כוכב לפרויקט
+  reportBug: דיווח על תקלה
+  contribute: תרומה לקוד
+  thanks: תודה שבחרת ב־Focuser. בהצלחה במשימות שלך.
+  tagline: כדי שתוכל להתרכז במה שחשוב לך.
+locked:
+  title: נעול כרגע
+  body: רשימת חסימה נעולה, ולכן Focuser מונע גישה לעמוד התוספים בדפדפן עד לסיום הנעילה.
