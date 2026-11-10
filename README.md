@@ -26,3 +26,29 @@
 - **לא** הורצה בדיקת בנייה של האפליקציה, **לא** הותקנה גרסה עברית, ולא נעשה שינוי בהתקנה המקורית.
 
 מקור: https://github.com/aadeshrao123/Focuser
+## הורדה ב־Windows באמצעות PowerShell
+
+אין צורך בהורדה מהדפדפן. פתח PowerShell והדבק את הקוד הבא:
+
+```powershell
+$ErrorActionPreference = 'Stop'
+$base = 'https://raw.githubusercontent.com/7155401-eng/focuser-hebrew/main'
+$folder = Join-Path $env:LOCALAPPDATA 'Focuser-Hebrew'
+New-Item -ItemType Directory -Path $folder -Force | Out-Null
+foreach ($name in @('he.json','he.yml')) {
+    Invoke-WebRequest -Uri "$base/$name" -OutFile (Join-Path $folder $name) -UseBasicParsing
+}
+(Get-Content (Join-Path $folder 'he.json') -Raw -Encoding UTF8 | ConvertFrom-Json).nav_dashboard
+Write-Host "קובצי התרגום נמצאים ב: $folder"
+```
+
+הפקודה מורידה **רק את שני קובצי התרגום** למיקום `%LOCALAPPDATA%\\Focuser-Hebrew`. היא אינה מחליפה את קובצי התוכנה, אינה משנה כללי חסימה ואינה פוגעת במנגנון העדכון. קיימת גם גרסה של הסקריפט עם בדיקת תקינות בשם [download-translations.ps1](download-translations.ps1).
+
+**הערה חשובה:** גרסה 0.11.5 של Focuser אינה מאפשרת לבחור שפה מקובץ JSON חיצוני. לפיכך, הורדת הקבצים לבדה **לא תעביר את ממשק התוכנה לעברית**. כדי לשמור על התקנה רשמית ועדכונים רגילים, יש לשלב את קובצי השפה ואת ההתאמות הנדרשות במקור הרשמי, לאחר בדיקות ובניית מהדורה רשמית. שום סקריפט במאגר הזה אינו מתיימר לעקוף מגבלה זו.
+
+## סטטוס הפרסום
+
+- התרגום הראשי: `he.json` — 385 מחרוזות ועוד ערך `$schema`.
+- תוסף הדפדפן: `he.yml` — 103 מחרוזות.
+- הועלו כקובצי שפה נפרדים, בלי שינוי בקוד Focuser.
+- התאמת ממשק מלאה ל־RTL, שילוב הודעות Rust ובדיקת בנייה עדיין לא בוצעו.
