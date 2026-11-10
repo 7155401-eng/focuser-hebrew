@@ -387,7 +387,7 @@
         "countPlural"
       ],
       "match": {
-        "countPlural=one": "יובא כלל אחד.",
+        "countPlural=one": "יובא {count} כלל.",
         "countPlural=other": "יובאו {count} כללים."
       }
     }
@@ -402,7 +402,7 @@
         "countPlural"
       ],
       "match": {
-        "countPlural=one": "אתר אחד",
+        "countPlural=one": "{count} אתר",
         "countPlural=other": "{count} אתרים"
       }
     }
@@ -417,7 +417,7 @@
         "countPlural"
       ],
       "match": {
-        "countPlural=one": "חריג אחד",
+        "countPlural=one": "{count} חריג",
         "countPlural=other": "{count} חריגים"
       }
     }
@@ -432,7 +432,7 @@
         "countPlural"
       ],
       "match": {
-        "countPlural=one": "אתר חדש אחד",
+        "countPlural=one": "{count} אתר חדש",
         "countPlural=other": "{count} אתרים חדשים"
       }
     }
@@ -447,7 +447,7 @@
         "countPlural"
       ],
       "match": {
-        "countPlural=one": "רשימת חסימה אחת",
+        "countPlural=one": "{count} רשימת חסימה",
         "countPlural=other": "{count} רשימות חסימה"
       }
     }
@@ -462,7 +462,7 @@
         "countPlural"
       ],
       "match": {
-        "countPlural=one": "תוכנה אחת",
+        "countPlural=one": "{count} תוכנה",
         "countPlural=other": "{count} תוכנות"
       }
     }
@@ -477,7 +477,7 @@
         "countPlural"
       ],
       "match": {
-        "countPlural=one": "מחזור אחד",
+        "countPlural=one": "{count} מחזור",
         "countPlural=other": "{count} מחזורים"
       }
     }
@@ -492,7 +492,7 @@
         "countPlural"
       ],
       "match": {
-        "countPlural=one": "אתר או תוכנה אחת",
+        "countPlural=one": "{count} אתר או תוכנה",
         "countPlural=other": "{count} אתרים ותוכנות"
       }
     }
