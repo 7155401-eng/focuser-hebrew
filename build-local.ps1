@@ -68,7 +68,6 @@ try {
   $front = Join-Path $src 'crates\focuser-ui\frontend'
   Run $npm @('ci') $front
   Run $npm @('run','typecheck') $front
-  Run $cargo @('test','-p','focuser-ui','i18n') $src
   $arch = 'x86_64-pc-windows-msvc'
   Run $cargo @('build','--release','--target',$arch,'-p','focuser-cli','-p','focuser-native') $src
   $release = Join-Path $src "target\$arch\release"
@@ -77,6 +76,7 @@ try {
   foreach ($name in @('focuser-cli','focuser-native')) {
     Copy-Item (Join-Path $release "$name.exe") (Join-Path $sidecars "$name-$arch.exe") -Force
   }
+  Run $cargo @('test','-p','focuser-ui','i18n') $src
   Run $npx @('--yes','@tauri-apps/cli@2','build','--target',$arch,'--no-bundle') (Join-Path $src 'crates\focuser-ui')
   $built = Join-Path $release 'focuser-ui.exe'
   if (-not (Test-Path $built)) { throw 'הקובץ לא נבנה.' }
