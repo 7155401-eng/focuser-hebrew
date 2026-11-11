@@ -1,4 +1,4 @@
-# Focuser בעברית: בנייה מקומית, ללא החלפת ההתקנה הרשמית.
+﻿# Focuser בעברית: בנייה מקומית, ללא החלפת ההתקנה הרשמית.
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
