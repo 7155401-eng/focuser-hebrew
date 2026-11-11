@@ -52,3 +52,33 @@ Write-Host "קובצי התרגום נמצאים ב: $folder"
 - תוסף הדפדפן: `he.yml` — 103 מחרוזות.
 - הועלו כקובצי שפה נפרדים, בלי שינוי בקוד Focuser.
 - התאמת ממשק מלאה ל־RTL, שילוב הודעות Rust ובדיקת בנייה עדיין לא בוצעו.
+
+## גרסת Windows מותאמת לעברית
+
+בנוסף לקובצי השפה, קיימים כעת במאגר כלים לבניית גרסת Focuser 0.11.5 עם עברית, RTL והודעות מערכת מתורגמות. מנגנון החסימה נשאר ללא שינוי.
+
+### התקנה מתוך GitHub Actions (מומלץ)
+
+הקובץ [install-hebrew.ps1](install-hebrew.ps1) מאתר את הבנייה המוצלחת האחרונה, מוריד את תוצאת הבנייה ומתקין אותה בתיקייה נפרדת. אם אין בנייה מוצלחת, הוא נעצר ללא התקנה.
+
+פקודת PowerShell:
+
+```powershell
+$p = Join-Path $env:TEMP 'focuser-hebrew-install.ps1'
+Invoke-WebRequest 'https://raw.githubusercontent.com/7155401-eng/focuser-hebrew/main/install-hebrew.ps1' -OutFile $p -UseBasicParsing
+& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $p
+```
+
+### בנייה מקומית חלופית
+
+הקובץ [build-local.ps1](build-local.ps1) מוריד את קוד המקור הרשמי, בודק את התרגום, מתקין כלי בנייה לפי הצורך, ומבצע בנייה במחשב Windows.
+
+```powershell
+$p = Join-Path $env:TEMP 'focuser-hebrew-build.ps1'
+Invoke-WebRequest 'https://raw.githubusercontent.com/7155401-eng/focuser-hebrew/main/build-local.ps1' -OutFile $p -UseBasicParsing
+& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $p
+```
+
+הגרסה העברית מותקנת ב־`%LOCALAPPDATA%\Programs\Focuser-Hebrew`. הגרסה הרשמית אינה נדרסת. יש לסגור אותה דרך הממשק לפני פתיחת העברית, בלי לעצור בכוח חסימה נעולה.
+
+**אזהרה:** הקובץ המותאם אינו חתום בחתימת היצרן; אין להניח שהחסימה נבדקה על המחשב עד לבדיקה מעשית. עדכונים רשמיים לגרסה המותאמת דורשים בנייה חוזרת או שילוב השפה בפרויקט המקורי. חסימת דומיינים ב־hosts וחסימת תוכנות פועלות ללא תוסף; חסימת URL/מילות מפתח עדיין דורשת תוסף.
