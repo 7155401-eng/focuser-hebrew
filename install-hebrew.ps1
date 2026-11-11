@@ -104,7 +104,8 @@ try {
     }
 
     $menu = Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs'
-    $lnk = Join-Path $menu ([string]::Concat('Focuser ', [char]0x05D1, [char]0x05E2, [char]0x05D1, [char]0x05E8, [char]0x05D9, [char]0x05EA, '.lnk'))
+    New-Item -ItemType Directory -Force -Path $menu | Out-Null
+    $lnk = Join-Path $menu 'Focuser Hebrew.lnk'
     $shell = New-Object -ComObject WScript.Shell
     $shortcut = $shell.CreateShortcut($lnk)
     $shortcut.TargetPath = Join-Path $target 'Focuser-Hebrew.exe'
