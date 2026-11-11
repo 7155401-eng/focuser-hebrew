@@ -47,9 +47,6 @@ jobs:
       - name: בדיקת TypeScript
         run: npm run typecheck
         working-directory: upstream/crates/focuser-ui/frontend
-      - name: בדיקות הודעות שפה ב-Rust
-        run: cargo test -p focuser-ui i18n
-        working-directory: upstream
       - name: בניית רכיבי CLI ותוסף Native
         run: cargo build --release --target x86_64-pc-windows-msvc -p focuser-cli -p focuser-native
         working-directory: upstream
@@ -60,6 +57,9 @@ jobs:
           New-Item -ItemType Directory -Path $bin -Force | Out-Null
           Copy-Item upstream/target/x86_64-pc-windows-msvc/release/focuser-cli.exe "$bin/focuser-cli-x86_64-pc-windows-msvc.exe"
           Copy-Item upstream/target/x86_64-pc-windows-msvc/release/focuser-native.exe "$bin/focuser-native-x86_64-pc-windows-msvc.exe"
+      - name: בדיקות הודעות שפה ב-Rust
+        run: cargo test -p focuser-ui i18n
+        working-directory: upstream
       - name: בניית גרסת Windows ניידת
         run: npx --yes @tauri-apps/cli@2 build --target x86_64-pc-windows-msvc --no-bundle
         working-directory: upstream/crates/focuser-ui
