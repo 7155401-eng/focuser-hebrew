@@ -29,20 +29,21 @@ try {
         if ($LASTEXITCODE -ne 0) { throw 'GitHub authentication failed.' }
     }
 
-    $raw = & $gh run list --repo $repo --workflow $workflow --limit 15 --json databaseId,status,conclusion,createdAt
-    if ($LASTEXITCODE -ne 0) { throw 'Cannot query GitHub Actions builds.' }
-    $runs = @($raw | ConvertFrom-Json)
-    $success = $runs |
+    # Use GitHub API to read a single well-defined run ID.
+    $apiUrl = 'https://api.github.com/repos/' + $repo +
+        '/actions/workflows/' + $workflow + '/runs?status=success&per_page=20'
+    $info = Invoke-RestMethod -Uri $apiUrl -Headers @{
+        'User-Agent' = 'Focuser-Hebrew-Installer'
+        'Accept' = 'application/vnd.github+json'
+    }
+    $success = @($info.workflow_runs) |
         Where-Object { $_.conclusion -eq 'success' } |
-        Sort-Object createdAt -Descending |
+        Sort-Object created_at -Descending |
         Select-Object -First 1
     if (-not $success) { throw 'No successful Windows build found. Nothing was installed.' }
 
-    # Save the run ID to a normal string variable before passing it to gh.exe.
-    # PowerShell may otherwise split object-property syntax in native commands.
-    $runId = [string]$success.databaseId
-    if ($runId -notmatch '^[0-9]+$') { throw 'Invalid GitHub Actions run ID.' }
-
+    $runId = [string]$success.id
+    if ($runId -notmatch '^[0-9]+$') { throw ('Invalid build ID from GitHub API: ' + $runId) }
     Write-Host ('Downloading verified GitHub build: ' + $runId)
     New-Item -ItemType Directory -Path $work -Force | Out-Null
     $downloadArgs = @(
