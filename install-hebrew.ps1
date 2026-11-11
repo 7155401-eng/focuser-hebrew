@@ -1,4 +1,4 @@
-# התקנת גרסת Focuser העברית מתוצאת בנייה מאומתת של GitHub Actions.
+﻿# התקנת גרסת Focuser העברית מתוצאת בנייה מאומתת של GitHub Actions.
 # המתקין הרשמי נשאר ללא שינוי. אין שינוי ברשימות חסימה או בקובץ hosts.
 $ErrorActionPreference = 'Stop'
 $repo = '7155401-eng/focuser-hebrew'
