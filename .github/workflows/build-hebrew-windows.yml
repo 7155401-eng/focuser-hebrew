@@ -1,0 +1,84 @@
+name: בניית Focuser בעברית ל-Windows
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "he.json"
+      - "scripts/prepare-hebrew.mjs"
+      - ".github/workflows/build-hebrew-windows.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    name: בניית גרסה ניידת בעברית
+    runs-on: windows-latest
+    steps:
+      - name: קובצי התרגום
+        uses: actions/checkout@v4
+      - name: מקור רשמי Focuser v0.11.5
+        uses: actions/checkout@v4
+        with:
+          repository: aadeshrao123/Focuser
+          ref: v0.11.5
+          path: upstream
+      - name: התקנת Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: upstream/crates/focuser-ui/frontend/package-lock.json
+      - name: התקנת Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+      - name: מטמון Rust
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: upstream
+      - name: שילוב תרגום עברי
+        run: node scripts/prepare-hebrew.mjs upstream .
+      - name: התקנת חבילות Frontend
+        run: npm ci
+        working-directory: upstream/crates/focuser-ui/frontend
+      - name: בדיקת TypeScript
+        run: npm run typecheck
+        working-directory: upstream/crates/focuser-ui/frontend
+      - name: בדיקות הודעות שפה ב-Rust
+        run: cargo test -p focuser-ui i18n
+        working-directory: upstream
+      - name: בניית רכיבי CLI ותוסף Native
+        run: cargo build --release --target x86_64-pc-windows-msvc -p focuser-cli -p focuser-native
+        working-directory: upstream
+      - name: הכנת רכיבי Tauri
+        shell: pwsh
+        run: |
+          $bin = 'upstream/crates/focuser-ui/binaries'
+          New-Item -ItemType Directory -Path $bin -Force | Out-Null
+          Copy-Item upstream/target/x86_64-pc-windows-msvc/release/focuser-cli.exe "$bin/focuser-cli-x86_64-pc-windows-msvc.exe"
+          Copy-Item upstream/target/x86_64-pc-windows-msvc/release/focuser-native.exe "$bin/focuser-native-x86_64-pc-windows-msvc.exe"
+      - name: בניית גרסת Windows ניידת
+        run: npx --yes @tauri-apps/cli@2 build --target x86_64-pc-windows-msvc --no-bundle
+        working-directory: upstream/crates/focuser-ui
+      - name: אריזת גרסה עברית
+        shell: pwsh
+        run: |
+          $dst = 'dist/Focuser-Hebrew'
+          New-Item -ItemType Directory -Path $dst -Force | Out-Null
+          Copy-Item upstream/target/x86_64-pc-windows-msvc/release/focuser-ui.exe "$dst/Focuser-Hebrew.exe"
+          Copy-Item upstream/target/x86_64-pc-windows-msvc/release/focuser-cli.exe "$dst/focuser-cli.exe"
+          Copy-Item upstream/target/x86_64-pc-windows-msvc/release/focuser-native.exe "$dst/focuser-native.exe"
+          Copy-Item upstream/crates/focuser-ui/binaries/focuser-cli-x86_64-pc-windows-msvc.exe "$dst/focuser-cli-x86_64-pc-windows-msvc.exe"
+          Copy-Item upstream/crates/focuser-ui/binaries/focuser-native-x86_64-pc-windows-msvc.exe "$dst/focuser-native-x86_64-pc-windows-msvc.exe"
+          Copy-Item he.json "$dst/he.json"
+          Compress-Archive -Path "$dst/*" -DestinationPath 'dist/Focuser-Hebrew-Windows.zip' -Force
+          Write-Host 'נבנה קובץ dist/Focuser-Hebrew-Windows.zip'
+      - name: פרסום חבילת ההתקנה כארטיפקט
+        uses: actions/upload-artifact@v4
+        with:
+          name: focuser-hebrew-windows
+          path: dist/Focuser-Hebrew-Windows.zip
+          retention-days: 30
